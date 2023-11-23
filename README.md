@@ -18,6 +18,7 @@ Leak Detection: The microcontroller analyzes the gas level data and triggers an 
 Data Transmission: The microcontroller transmits the gas level data and alert notifications to a central server or user devices via the wireless communication module.
 User Notification: The central server or user devices receive the gas level data and alerts, providing real-time information on gas levels and potential leaks.
 Maintenance Reminders: The system can also provide maintenance reminders based on sensor data, indicating when to perform routine maintenance checks on LPG equipment
+
 FLOWCHART:
 
 ![Screenshot 2023-11-22 112453](https://github.com/RILWANAHMEDK/IOT-BASED-LPG-GAS-MAINTENANCE-AND-NOTIFICATION/assets/149694620/2aca7132-7ea2-4118-b2d1-8f402d94b1e9)
