@@ -1,4 +1,4 @@
-![Screenshot 2023-11-22 112453](https://github.com/RILWANAHMEDK/IOT-BASED-LPG-GAS-MAINTENANCE-AND-NOTIFICATION/assets/149694620/689340bd-b9da-411f-8ea5-524f303485be)# IOT-BASED-LPG-GAS-MAINTENANCE-AND-NOTIFICATIOn
+# IOT-BASED-LPG-GAS-MAINTENANCE-AND-NOTIFICATIOn
 IOT-based-LPG-gas-maintenance-and-notification
 AIM: The aim of an IoT-based LPG gas maintenance and notification project is to develop a system that can remotely monitor and manage the usage of LPG gas cylinders in households and commercial establishments. The system would use sensors and actuators to collect data on gas leakage, and other relevant parameters. This data would then be transmitted to a central server for analysis and notification.
 
