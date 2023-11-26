@@ -48,7 +48,71 @@ Step 3: Test the Functionality • Simulate gas leakage by blowing on the gas se
 Step 4: Deploy the System • Mount the gas sensor and GSM SIM module in an appropriate enclosure. • Connect the power supply to the system. • Install the system in the desired location, ensuring proper ventilation for the gas sensor.
 
 Step 5: Monitor and Maintain • Regularly check the GSM SIM module for SMS alerts indicating gas leakage. • Periodically calibrate the gas sensor to maintain accuracy. • Ensure the power supply remains connected and functional. • Replace the GSM SIM module if necessary.
+Code:
+#include <SoftwareSerial.h>
 
+SoftwareSerial SIM900(10, 11);
+// Define the pin for the MQ-5 gas sensor
+int gasSensorPin = A0;    // Analog pin A0 for sensor output
+int buzzerPin = 3;        // Digital pin 8 for the piezo buzzer
+
+String f1001 = "+918867475334"; // Home cell phone number
+String f1002 = "+917499992310"; 
+void setup() {
+  Serial.begin(9600);  
+  delay(2000);   // Initialize serial communication
+  pinMode(gasSensorPin, INPUT); // Set the sensor pin as INPUT
+  pinMode(buzzerPin, OUTPUT); 
+  Serial.begin(9600); 
+                // Nodemcu is connected over here
+        
+  SIM900.begin(9600); // original 19200. while enter 9600 for sim900A
+                      // Init SPI bus
+           // Set the buzzer pin as OUTPUT
+}
+
+void loop() {
+  int sensorValue = analogRead(gasSensorPin); // Read sensor value
+
+  // Print the sensor value to the Serial Monitor
+  Serial.print("Gas Sensor Value: ");
+  Serial.println(sensorValue);
+
+  int threshold = 120; // Set a threshold value (adjust as needed)
+
+  // If the sensor value crosses the threshold, indicate gas leakage
+  if (sensorValue > threshold)
+   {
+     sendsms(" GAS DETECTED PLEASE TAKE CAUTION", f1001);
+          delay(1000);  
+    Serial.println("Gas Leakage Detected!");
+    // Sound the buzzer
+    digitalWrite(buzzerPin, HIGH);
+    delay(1000); // Buzz for 1 second
+    digitalWrite(buzzerPin, LOW);
+    delay(1000); // Wait for 1 second
+    
+  } else {
+    digitalWrite(buzzerPin, LOW); // Turn off the buzzer if no gas leakage
+  }
+}
+
+void sendsms(String message, String number)
+{
+String mnumber = "AT + CMGS = \""+number+"\""; 
+   SIM900.print("AT+CMGF=1\r");                   
+  delay(1000);
+ SIM900.println(mnumber);  // recipient's mobile number, in international format
+ 
+  delay(1000);
+  SIM900.println(message);                         // message to send
+  delay(1000);
+  SIM900.println((char)26);                        // End AT command with a ^Z, ASCII code 26
+  delay(1000); 
+  SIM900.println();
+  delay(100);                                     // give module time to send SMS
+ // SIM900power();  
+}
 ADVANTAGES:
 
 Safety Improvement: Early detection of leaks or other issues can prevent accidents and enhance overall safety. Automatic shut-off systems can be implemented to stop gas flow in case of a leak, minimizing potential hazards.
